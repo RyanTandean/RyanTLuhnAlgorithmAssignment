@@ -38,7 +38,7 @@ def enterCustomerInfo():
         postalCode = str(input("Postal Code: "))
         postalCodeThree = postalCode[:3]
         creditCard = str(input("Credit Card Number: "))
-            
+    return firstName, lastName, city, postalCode, creditCard
 
 '''
     This function is to be edited to achieve the task.
@@ -112,9 +112,25 @@ def validateCreditCard(a):
     You may place as many or as few parameters as needed
     This function may also be broken down further depending on your algorithm/approach
 '''
-def generateCustomerDataFile(a, b, c, d, e):
-    pass
+'''
 
+my_tuple = ("apple", "banana", "cherry")
+fruit1, fruit2, fruit3 = my_tuple
+
+print(fruit1)   # Output: apple
+print(fruit2)   # Output: banana
+print(fruit3)   # Output: cherry
+
+'''
+def generateCustomerDataFile():
+    folder = os.getcwd()
+    fileName = folder + "\\LuhnAlgorithmAssignment\\CustomerInformation.csv"
+    isFile = os.path.isfile(fileName)
+    print(info)
+    if isFile == False:
+        file = open(fileName, "w")
+    elif isFile == True:
+        file = open(fileName, "a")
     
 
 ####################################################################
@@ -145,7 +161,7 @@ while userInput != exitCondition:
     if userInput == enterCustomerOption:
         # Only the line below may be editted based on the parameter list and how you design the method return
         # Any necessary variables may be added to this if section, but nowhere else in the code
-        enterCustomerInfo()
+        info = enterCustomerInfo()
 
     elif userInput == generateCustomerOption: 
         # Only the line below may be editted based on the parameter list and how you design the method return
