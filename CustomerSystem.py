@@ -24,9 +24,16 @@ def printMenu():
 '''
 def enterCustomerInfo():
     print()
-    firstName = str(input("First name: "))    # Remove this pass statement and add your own code below
-    lastName = str(input("Last name: "))
-    city = str(input("City: "))
+    firstName = input("First name: ")   # Remove this pass statement and add your own code below
+    while firstName == "":
+        print("This field cannot be left empty")
+        firstName = input("First name: ")
+    lastName = input("Last name: ")
+    while lastName == "":
+        lastName = input("Last name: ")
+    city = input("City: ")
+    while city == "":
+        city = input("City: ")
     postalCode = str(input("Postal Code: "))
     postalCodeThree = postalCode[:3]
     creditCard = str(input("Credit Card Number: "))
@@ -38,6 +45,7 @@ def enterCustomerInfo():
         postalCode = str(input("Postal Code: "))
         postalCodeThree = postalCode[:3]
         creditCard = str(input("Credit Card Number: "))
+    print("All information validated, information saved")
     return firstName, lastName, city, postalCode, creditCard
 
 '''
@@ -60,7 +68,6 @@ def validatePostalCode(a, b):
             text = file.readline()
             postalData = text[:3]
             if b == postalData:
-                print("Postal Code valid")
                 return True
             
         if b != postalData:
@@ -78,7 +85,7 @@ def validatePostalCode(a, b):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def validateCreditCard(a):
-    if len(a) < 9:
+    if len(a) < 9 or len(a) > 16:
         print("Invalid Credit Card Number")
         return False
     else:
@@ -104,7 +111,6 @@ def validateCreditCard(a):
             print("Invalid credit card")
             return False
         else:
-            print("Credit card Valid")
             return True
 '''      
     This function is to be edited to achieve the task.
@@ -112,26 +118,26 @@ def validateCreditCard(a):
     You may place as many or as few parameters as needed
     This function may also be broken down further depending on your algorithm/approach
 '''
-'''
-
-my_tuple = ("apple", "banana", "cherry")
-fruit1, fruit2, fruit3 = my_tuple
-
-print(fruit1)   # Output: apple
-print(fruit2)   # Output: banana
-print(fruit3)   # Output: cherry
-
-'''
 def generateCustomerDataFile():
     folder = os.getcwd()
     fileName = folder + "\\LuhnAlgorithmAssignment\\CustomerInformation.csv"
     isFile = os.path.isfile(fileName)
-    print(info)
+    print("Information added to CSV")
+    first_name, last_name, city_, postal_code, credit_card = info
     if isFile == False:
         file = open(fileName, "w")
+        file.writelines("ID | First Name | Last Name | City | Postal Code | Credit Card Number"+"\n")
+        file.writelines("1"+" | "+first_name+" | "+last_name+" | "+city_+" | "+postal_code+" | "+credit_card+"\n")
+        file.close
     elif isFile == True:
+        file = open(fileName, "r")
+        line = file.readlines()
+        lineCount = int(len(line))
+        file.close
+        id = str(lineCount) + " | "
         file = open(fileName, "a")
-    
+        file.writelines(id+first_name+" | "+last_name+" | "+city_+" | "+postal_code+" | "+credit_card+"\n" )
+        file.close
 
 ####################################################################
 #       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         #
