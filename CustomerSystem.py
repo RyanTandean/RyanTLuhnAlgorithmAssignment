@@ -23,27 +23,42 @@ def printMenu():
     This function may also be broken down further depending on your algorithm/approach
 '''
 def enterCustomerInfo():
+    '''
+    Asks user for first name, last name, city, postal code, credit card number
+
+    For first name, last name, city, uses a while loop to make sure the user is submiting nothing
+
+    For credit card and postal code, calls on the other 2 functions, validatePostalCode() and validateCreditCard()
+
+    Then uses a while loop so until postal code and credit card are validated, the user cannot progress
+    After everything is validated, returns all of the customer information as a tuple so it can be used for 
+    generating the CSV for the user
+    '''
     print()
-    firstName = input("First name: ")   # Remove this pass statement and add your own code below
+    firstName = input("First name: ")
     while firstName == "":
         print("This field cannot be left empty")
+        print()
         firstName = input("First name: ")
     lastName = input("Last name: ")
     while lastName == "":
+        print("This field cannot be left empty")
+        print()
         lastName = input("Last name: ")
     city = input("City: ")
     while city == "":
+        print("This field cannot be left empty")
+        print()
         city = input("City: ")
     postalCode = str(input("Postal Code: "))
     postalCodeThree = postalCode[:3]
-    creditCard = str(input("Credit Card Number: "))
-    while (validatePostalCode(postalCode, postalCodeThree) == False) and (validateCreditCard(creditCard) == False):
+    while (validatePostalCode(postalCode, postalCodeThree) == False):
         print()
-        firstName = str(input("First name: "))    # Remove this pass statement and add your own code below
-        lastName = str(input("Last name: "))
-        city = str(input("City: "))
         postalCode = str(input("Postal Code: "))
         postalCodeThree = postalCode[:3]
+    creditCard = str(input("Credit Card Number: "))
+    while (validateCreditCard(creditCard) == False):
+        print()
         creditCard = str(input("Credit Card Number: "))
     print("All information validated, information saved")
     return firstName, lastName, city, postalCode, creditCard
@@ -56,6 +71,18 @@ def enterCustomerInfo():
 '''
 
 def validatePostalCode(a, b):
+    '''
+    First, checks if the postal code submitted is less than 3 characthers
+
+    Then opens and reads the postal codes CSV to compare the first 3 characters of the postal code submitted 
+    agaisnt any of the first 3 characters of the postal codes in the CSV
+
+    if there is a match, return True for validated
+
+    if there is no match, return False for not validated
+    
+    
+    '''
     if len(a)<3:
         print("Invalid postal code")
         return False
@@ -85,6 +112,17 @@ def validatePostalCode(a, b):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def validateCreditCard(a):
+    '''
+    First checks if the length of the credit card number is valid
+
+    Then checks if the credit card is valid, (if the sum after going through the Luhn algorithm ends with 0)
+
+    return True if valid
+
+    return False if not valid
+
+    
+    '''
     if len(a) < 9 or len(a) > 16:
         print("Invalid Credit Card Number")
         return False
@@ -119,6 +157,17 @@ def validateCreditCard(a):
     This function may also be broken down further depending on your algorithm/approach
 '''
 def generateCustomerDataFile():
+    '''
+    If it does not exist, creates a file called "CustomerInformation.csv" as write
+
+    If it does exist, opens a file called "CustomerInformation.csv" as append
+
+    Eitheir way, it adds the current saved information of the customer
+
+    id is assigned using line count
+
+    
+    '''
     folder = os.getcwd()
     fileName = folder + "\\LuhnAlgorithmAssignment\\CustomerInformation.csv"
     isFile = os.path.isfile(fileName)
