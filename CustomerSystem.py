@@ -164,6 +164,8 @@ def generateCustomerDataFile():
 
     Eitheir way, it adds the current saved information of the customer
 
+    It does this by taking the tuple returned from the enterCustomerInfo() function and seperating the items
+    
     id is assigned using line count
 
     
