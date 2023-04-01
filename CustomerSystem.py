@@ -88,7 +88,7 @@ def validatePostalCode(a, b):
         return False
     else:
         folder = os.getcwd()
-        fileName = folder + "\\LuhnAlgorithmAssignment\\postal_codes.csv"
+        fileName = folder + "\\RyanTLuhnAlgorithmAssignment\\postal_codes.csv"
         file = open(fileName, "r")
         text = file.readline()
         while text != "":
@@ -170,11 +170,12 @@ def generateCustomerDataFile():
 
     
     '''
+    first_name, last_name, city_, postal_code, credit_card = info
     folder = os.getcwd()
-    fileName = folder + "\\LuhnAlgorithmAssignment\\CustomerInformation.csv"
+    fileName = folder + "\\RyanTLuhnAlgorithmAssignment\\CustomerInformation.csv"
     isFile = os.path.isfile(fileName)
     print("Information added to CSV")
-    first_name, last_name, city_, postal_code, credit_card = info
+
     if isFile == False:
         file = open(fileName, "w")
         file.writelines("ID | First Name | Last Name | City | Postal Code | Credit Card Number"+"\n")
